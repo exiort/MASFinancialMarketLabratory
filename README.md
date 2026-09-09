@@ -2,6 +2,40 @@
 
 A Multi-Agent System (MAS) simulation framework for a financial market. This project provides a controlled laboratory environment designed to simulate continuous double auction (CDA) order book dynamics, time-varying economic signals, and the interactions of heterogeneous trading agents.
 
+## 📄 Paper
+
+**Multi-Agent Financial Market Laboratory: A Controlled Environment for
+Market Dynamics Analysis** — single-author paper
+· [`MarketDynamicsAnalysis.pdf`](MarketDynamicsAnalysis.pdf)
+
+This laboratory was built to run one controlled experiment: what happens to a
+market as trend-following capital grows? Five configurations share an
+identical baseline — 100 market makers, 400 value investors, 200 noise
+traders — and differ in exactly one dimension, the momentum trader count
+(0 → 75 → 150 → 225 → 300). Every mechanism, parameter and economic setting
+is held fixed, so any difference in outcome is attributable to composition
+alone. Metrics are measured after a burn-in window and aggregated over
+multiple independent seeds.
+
+**Findings.** Instability does not grow smoothly with momentum participation;
+it appears past a threshold and changes the market's regime. Volatility shifts
+from intermittent bursts to a persistent high-volatility state, and liquidity
+resilience degrades — mean recovery time after a liquidity shock rises roughly
+six-fold from baseline to the densest configuration, while the recovery *rate*
+stays near 100%. Markets keep working, but heal progressively more slowly.
+
+At the agent level the effect is non-monotonic. Moderate momentum trading
+*helps* value investors by creating exploitable mispricing: realized PnL and
+risk-adjusted efficiency both peak at intermediate densities. Past the
+threshold, mispricing persists long enough that value investors are forced to
+carry larger inventories, efficiency collapses, and worst-case drawdowns reach
+total capital loss. Median PnL is negative in *every* configuration while the
+mean stays positive — profitability is concentrated in a small subset of
+agents, and aggregate averages hide widespread failure.
+
+All results are reproducible from the JSON configurations in this repository;
+the paper documents the exact scenario files and seeds used.
+
 ## Features
 
 * **Continuous Double Auction (CDA) Engine:** A price-time priority matching engine that generates transaction prices endogenously from agent order flows.
